@@ -1,0 +1,48 @@
+﻿@model WebApplication1.Models.Domain.Entities.Book
+@{
+    ViewData["title"] = "افزودن کتاب جدید";
+    var categories = ViewBag.Categories as List<WebApplication1.Models.Domain.Entities.Category>;
+}
+<h2>افزودن کتاب جدید</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label>عنوان</label>
+        <input type="text" name="Title" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>نویسنده</label>
+        <input type="text" name="Author" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>توضیحات</label>
+        <input type="text" name="Description" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>قیمت</label>
+        <input type="number" name="Price" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>دسته بندی</label>
+        <select name="CategoryId" class="form-control" required="">
+            @if (categories is not null)
+            {
+                @foreach (var category in categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Upload Image</label>
+        <input type="file" name="imageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Book</button>
+</form>

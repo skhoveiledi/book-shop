@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Register";
+    var roles = ViewBag.Roles as List<WebApplication1.Models.Domain.Enums.RoleEnum>;
+}
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Vazirmatn', sans-serif;
+        direction: rtl;
+        background-color: #f5f8fc;
+    }
+
+    .register-container {
+        max-width: 500px;
+        margin: 50px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+</style>
+
+<div class="register-container">
+    <h2 class="text-center mb-4">ثبت‌نام</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label class="form-label">نام</label>
+            <input type="text" name="Name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">ایمیل</label>
+            <input type="email" name="Email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">رمز عبور</label>
+            <input type="password" name="Password" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">نقش کاربری</label>
+            <select name="Role" class="form-select" required>
+                <option value="">-- انتخاب نقش --</option>
+                @if (roles != null)
+                {
+                    @foreach (var role in roles)
+                    {
+                        <option value="@((int)role)">@role</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100 mb-3">ثبت‌نام</button>
+
+        <div class="text-center">
+            <a href="/User/Login">قبلاً ثبت‌نام کرده‌اید؟ وارد شوید</a>
+        </div>
+    </form>
+</div>

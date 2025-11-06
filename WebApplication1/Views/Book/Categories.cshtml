@@ -1,0 +1,62 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "دسته بندی ها";
+    Layout = "_Layout";
+    var categories = ViewBag.Categories as List<WebApplication1.Models.Domain.Entities.Category>;
+}
+
+<div class="row g-4 justify-content-center">
+    @if (categories != null && categories.Any())
+    {
+        @foreach (var c in categories)
+        {
+            <div class="col-md-2 col-6">
+                <div class="book-card">
+                    <h6 class="mt-2">@c.Name</h6>
+                    
+                   
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <p class="text-center text-muted">هیچ کتابی یافت نشد</p>
+        </div>
+    }
+    
+    @* <div class="row g-4 justify-content-center">
+        @if (categories != null && categories.Any())
+        {
+            @foreach (var c in categories)
+            {
+                <div class="col-md-2 col-6">
+                    <div class="book-card">
+                        @if (!string.IsNullOrEmpty(c.ImagePath))
+                        {
+                            <img src="@b.ImagePath" class="img-fluid rounded mb-3" style="height:280px;width:180px;object-fit:cover;margin:auto;display:block;" alt="@b.Title" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded mb-3" style="width:180px;height:280px;margin:auto;"></div>
+                        }
+                        <h6 class="mt-2">@b.Title</h6>
+                        @if (!string.IsNullOrEmpty(b.Author))
+                        {
+                            <small class="text-muted d-block">@b.Author</small>
+                        }
+                        <p class="price mt-2">@b.Price.ToString("N0") تومان</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">هیچ کتابی یافت نشد</p>
+            </div>
+        }
+    </div> *@
+</div>

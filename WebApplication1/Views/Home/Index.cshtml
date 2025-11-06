@@ -1,0 +1,75 @@
+﻿@model WebApplication1.Models.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "خانه کتاب | فروشگاه آنلاین";
+    var categories = ViewBag.Categories as List<WebApplication1.Models.Domain.Entities.Category>;
+    var books = ViewBag.LatestBooks as List<WebApplication1.Models.Domain.Entities.Book>;
+}
+
+
+
+<div class="container">
+    <div class="hero">
+        <h1 class="fw-bold mb-3">هر کتابی که می‌خواهی، اینجا هست</h1>
+        <p class="mb-4">با بیش از ۱۰۰,۰۰۰ عنوان کتاب در دسته‌بندی‌های مختلف، سفر مطالعاتی خود را آغاز کنید.</p>
+        <a href="#" class="btn btn-light btn-lg rounded-pill">مشاهده پرفروش‌ها</a>
+    </div>
+
+    <h4 class="fw-bold mb-4 text-center">دسته‌بندی‌ها</h4>
+    <div class="row g-3 justify-content-center">
+        @if (categories != null && Model.Categories.Any())
+        {
+            @foreach (var c in Model.Categories)
+            {
+                <div class="col-md-2 col-6">
+                    <div class="category-card"><a asp-controller="Book" asp-action="Categories" asp-route-id="">@c.Name</a></div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">هیچ دسته‌بندی‌ای یافت نشد</p>
+            </div>
+        }
+    </div>
+
+    <h4 class="fw-bold mt-5 mb-4 text-center">جدیدترین کتاب‌ها</h4>
+    <div class="row g-4 justify-content-center">
+        @if (books != null && @Model.LatestBooks.Any())
+        {
+            @foreach (var b in @Model.LatestBooks)
+            {
+                <div class="col-md-2 col-6">
+                    <div class="book-card">
+                        @if (!string.IsNullOrEmpty(b.ImagePath))
+                        {
+                            <img src="@b.ImagePath" class="img-fluid rounded mb-3" style="height:280px;width:180px;object-fit:cover;margin:auto;display:block;" alt="@b.Title" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded mb-3" style="width:180px;height:280px;margin:auto;"></div>
+                        }
+                        <h6 class="mt-2">@b.Title</h6>
+                        @if (!string.IsNullOrEmpty(b.Author))
+                        {
+                            <small class="text-muted d-block">@b.Author</small>
+                        }
+                        <p class="price mt-2">@b.Price.ToString("N0") تومان</p>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">هیچ کتابی یافت نشد</p>
+            </div>
+        }
+    </div>
+
+    <div class="text-center mt-5 mb-4">
+        <a asp-controller="Book" asp-action="Add" class="btn btn-success btn-lg">➕ افزودن کتاب جدید</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

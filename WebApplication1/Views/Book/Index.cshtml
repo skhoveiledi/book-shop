@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["title"] = "لیست کتاب های مجموعه";
+    var books = ViewBag.Books as List<WebApplication1.Models.Domain.Entities.Book>;
+}
+
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn/Vazirmatn-font-face.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet" />
+<style>
+    body {
+        font-family: 'Vazirmatn', sans-serif;
+        direction: rtl;
+        background-color: #f5f8fc;
+    }
+
+    .book-card {
+        background: #fff;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+        transition: transform 0.2s;
+    }
+
+        .book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+    .price {
+        color: #e63946;
+        font-weight: bold;
+    }
+
+    .page-header {
+        background: linear-gradient(90deg, #0053b3, #0073ff);
+        color: white;
+        padding: 40px 20px;
+        border-radius: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="page-header">
+        <h1 class="fw-bold mb-3">لیست تمام کتاب‌ها</h1>
+        <a href="/Books/Add" class="btn btn-light btn-lg">➕ افزودن کتاب جدید</a>
+        <a href="/Home/Index" class="btn btn-outline-light btn-lg">بازگشت به خانه</a>
+    </div>
+
+    @if (books != null && books.Any())
+    {
+        <div class="row g-4">
+            @foreach (var book in books)
+            {
+                <div class="col-md-3 col-6">
+                    <div class="book-card">
+                        @if (!string.IsNullOrEmpty(book.ImagePath))
+                        {
+                            <img src="@book.ImagePath" class="img-fluid rounded mb-3"
+                                 style="height:280px;width:180px;object-fit:cover;margin:auto;display:block;"
+                                 alt="@book.Title" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded mb-3" style="width:180px;height:280px;margin:auto;"></div>
+                        }
+
+                        <h5 class="fw-bold mt-2">@book.Title</h5>
+
+                        @if (!string.IsNullOrEmpty(book.Author))
+                        {
+                            <p class="text-muted small mb-2">نویسنده: @book.Author</p>
+                        }
+
+                        @if (!string.IsNullOrEmpty(book.Description))
+                        {
+                            <p class="text-muted small" style="height:40px;overflow:hidden;">@book.Description</p>
+                        }
+
+                        <p class="price mt-3">@book.Price.ToString("N0") تومان</p>
+
+                        <small class="text-muted d-block mt-2">
+                            تاریخ ثبت: @book.CreatedAt.ToString("yyyy/MM/dd")
+                        </small>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="text-center mt-4 mb-4">
+            <p class="text-muted">تعداد کل کتاب‌ها: @books.Count</p>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <h4>هیچ کتابی یافت نشد</h4>
+            <p>لطفاً کتاب جدیدی اضافه کنید.</p>
+            <a href="/Books/Add" class="btn btn-primary">افزودن کتاب</a>
+        </div>
+    }
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
