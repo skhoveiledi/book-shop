@@ -9,5 +9,6 @@ namespace WebApplication1.Models.Application.InfraStructor.Interfaces
         void AddBook(Book book);
         Book? GetById(int bookId);
         List<Book> GetAllBooks();
+        List<Book> GetBooksInCategory(int categoryId);
     }
 }

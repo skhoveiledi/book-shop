@@ -11,4 +11,5 @@ public interface IUserService
     void DeleteUser(int userId);
     bool EmailExists(string email);
     User? LoginUser(string email, string password);
+    bool ValidateUser(int userId);
 }

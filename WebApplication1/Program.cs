@@ -5,6 +5,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews()
     .AddRazorRuntimeCompilation();
+//session *****----*******
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromSeconds(50);
+        options.Cookie.HttpOnly = true;//****
+        options.Cookie.IsEssential = true;//***
+    }
+);
+
 
 var app = builder.Build();
 
@@ -24,6 +34,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapStaticAssets();
 

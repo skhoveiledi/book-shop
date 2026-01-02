@@ -1,0 +1,58 @@
+﻿@using Domain
+@model List<WebApplication1.Models.Domain.Entities.Book>
+@{
+    ViewData["title"] = "لیست کتاب های مجموعه";
+}
+<div class="container mt-3   ">
+@if (Model is not null && Model.Any())
+{
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var book in Model)
+                {
+                    <div class="col-md-3 col-6">
+                        <div class="book-card">
+                            @if (!string.IsNullOrEmpty(book.ImagePath))
+                            {
+                                <img src="@book.ImagePath" class="img-fluid rounded mb-3"
+                                     style="height:280px;width:180px;object-fit:cover;margin:auto;display:block;"
+                                     alt="@book.Title" />
+                            }
+                            else
+                            {
+                                <div class="bg-light rounded mb-3" style="width:180px;height:280px;margin:auto;"></div>
+                            }
+
+                            <h5 class="fw-bold mt-2">@book.Title</h5>
+
+                            @if (!string.IsNullOrEmpty(book.Author))
+                            {
+                                <p class="text-muted small mb-2">نویسنده: @book.Author</p>
+                            }
+
+                            @if (!string.IsNullOrEmpty(book.Description))
+                            {
+                                <p class="text-muted small" style="height:40px;overflow:hidden;">@book.Description</p>
+                            }
+
+                            <p class="price mt-3">@book.Price.ToString("N0") تومان</p>
+
+                            <small class="text-muted d-block mt-2">
+                                تاریخ ثبت: @book.CreatedAt.ConvertToHijri()
+                            </small>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="text-center mt-4 mb-4">
+                <p class="text-muted">تعداد کل کتاب‌ها: @Model.Count</p>
+            </div>
+        }
+        
+}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

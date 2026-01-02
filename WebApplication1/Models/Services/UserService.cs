@@ -47,4 +47,9 @@ public class UserService : IUserService
     {
         return _userRepository.GetUser(email,password);
     }
+
+    public bool ValidateUser(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }

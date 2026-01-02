@@ -37,8 +37,19 @@ public class UserRepository : IUserRepository
 
     public void UpdateUser(User user)
     {
-        _context.Update(user);
-        _context.SaveChanges();
+        //_context.Update(user);
+        var findUser = _context.Users.FirstOrDefault(u => u.Id == user.Id);
+        if (findUser != null)
+        {
+            findUser.Name = user.Name;
+            findUser.Email = user.Email;
+            findUser.Password = user.Password;
+            findUser.Role = user.Role;
+            _context.SaveChanges();
+
+        }
+
+
     }
 
     public void DeleteUser(int userId)

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Xml
+@using Domain
+@{
     ViewData["title"] = "لیست کتاب های مجموعه";
     var books = ViewBag.Books as List<WebApplication1.Models.Domain.Entities.Book>;
 }
@@ -82,7 +84,7 @@
                         <p class="price mt-3">@book.Price.ToString("N0") تومان</p>
 
                         <small class="text-muted d-block mt-2">
-                            تاریخ ثبت: @book.CreatedAt.ToString("yyyy/MM/dd")
+                            تاریخ ثبت: @book.CreatedAt.ConvertToHijri()
                         </small>
                     </div>
                 </div>

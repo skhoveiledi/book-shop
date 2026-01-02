@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models.Application.InfraStructor.Interfaces.Services;
+using WebApplication1.Models.Config;
 using WebApplication1.Models.Domain.Entities;
 using WebApplication1.Models.Domain.Enums;
 using WebApplication1.Models.Services;
@@ -37,7 +38,12 @@ namespace WebApplication1.Controllers
                 ViewBag.Error = "Invalid Email or Password.";
                 return View();
             }
+            CurrentUser.Login(user);
             //HttpContext.Session.SetString("UserId", user.Id.ToString());
+            //HttpContext.Session.SetString("UserName",user.Name);
+            //HttpContext.Session.SetString("UserEmail", user.Email);
+            //HttpContext.Session.SetString("UserRole", user.Role.ToString());
+
 
             if (user.Role == RoleEnum.Admin)
                 return RedirectToAction("Index", "Admin");
@@ -78,6 +84,7 @@ namespace WebApplication1.Controllers
         public IActionResult Logout()
         {
             //HttpContext.Session.Clear();
+            CurrentUser.Logout();
             return RedirectToAction("Index","Home");
         }
 

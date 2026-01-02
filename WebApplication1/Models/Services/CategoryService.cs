@@ -25,22 +25,22 @@ public class CategoryService : ICategoryService
 
     public void AddCategory(string name)
     {
-        //var cat = new Category()
-        //{
-        //    Name = name
-        //};
-        //_categoryRepository.AddCategory(cat);
         _categoryRepository.AddCategory(name);
     }
 
-    public void UpdateCategory(int categoryId)
+    public void UpdateCategory(int categoryId, string name)
     {
-        _categoryRepository.UpdateCategory(categoryId);
+        _categoryRepository.UpdateCategory(categoryId,name);
     }
 
     public void DeleteCategory(int categoryId)
     {
         _categoryRepository.DeleteCategory(categoryId);
 
+    }
+
+    public Category? GetCategoryByName(string name)
+    {
+        return _categoryRepository.GetCategoryByName(name);
     }
 }

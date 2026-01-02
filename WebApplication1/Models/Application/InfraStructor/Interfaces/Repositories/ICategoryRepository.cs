@@ -7,7 +7,8 @@ public interface ICategoryRepository
     List<Category> getAllCategories();
     Category? GetCategoryById(int id);
     void AddCategory(string categoryName);
-    void UpdateCategory(int categoryId);
+    void UpdateCategory(int categoryId, string name);
     void DeleteCategory(int categoryId);
     bool CategoryExists(int categoryId);
+    Category? GetCategoryByName(string name);
 }

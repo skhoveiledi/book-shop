@@ -26,20 +26,20 @@ public class CategoryRepository : ICategoryRepository
 
     public void AddCategory(string categoryName)
     {
-        throw new NotImplementedException();
-    }
-
-    public void AddCategory(Category category)
-    {
+        var category = new Category
+        {
+            Name = categoryName
+        };
         _context.Categories.Add(category);
         _context.SaveChanges();
     }
 
-    public void UpdateCategory(int categoryId)
+    public void UpdateCategory(int categoryId, string name)
     {
         var cat = _context.Categories.FirstOrDefault(c => c.Id == categoryId);
         if (cat is not null)
         {
+            cat.Name = name;
             _context.Categories.Update(cat);
             _context.SaveChanges();
         }
@@ -58,5 +58,10 @@ public class CategoryRepository : ICategoryRepository
     public bool CategoryExists(int categoryId)
     {
         return _context.Categories.Any(c=>c.Id==categoryId);
+    }
+
+    public Category? GetCategoryByName(string name)
+    {
+        return _context.Categories.FirstOrDefault(c => c.Name == name);
     }
 }

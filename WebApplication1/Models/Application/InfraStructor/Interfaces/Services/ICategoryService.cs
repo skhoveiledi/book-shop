@@ -7,6 +7,7 @@ public interface ICategoryService
     List<Category> GetAllCategories();
     Category GetCategoryById(int categoryId);
     void AddCategory(string name);
-    void UpdateCategory(int categoryId);
+    void UpdateCategory(int categoryId, string name);
     void DeleteCategory(int categoryId);
+    Category? GetCategoryByName(string name);
 }

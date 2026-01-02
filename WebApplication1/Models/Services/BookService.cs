@@ -39,5 +39,10 @@ namespace WebApplication1.Models.Services
         {
             return _bookRepository.GetAllBooks();
         }
+
+        public List<Book> GetBooksInCategory(int categoryId)
+        {
+            return _bookRepository.GetBooksInCategory(categoryId);
+        }
     }
 }

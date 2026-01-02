@@ -45,5 +45,12 @@ namespace WebApplication1.Models.Application.InfraStructor.DataAccess.Repositori
                 .OrderByDescending(b => b.CreatedAt)
                 .ToList();
         }
+
+        public List<Book> GetBooksInCategory(int categoryId)
+        {
+            return _context.Books.Include(b=>b.Category)
+                .Where(b=>b.CategoryId==categoryId)
+                .ToList();
+        }
     }
 }

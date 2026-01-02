@@ -21,7 +21,7 @@
             @foreach (var c in Model.Categories)
             {
                 <div class="col-md-2 col-6">
-                    <div class="category-card"><a asp-controller="Book" asp-action="Categories" asp-route-id="">@c.Name</a></div>
+                    <div class="category-card"><a asp-controller="Book" asp-action="GetBooksInCategory" asp-route-id="@c.Id">@c.Name</a></div>
                 </div>
             }
         }

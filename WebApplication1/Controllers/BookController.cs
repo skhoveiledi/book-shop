@@ -33,6 +33,13 @@ public class BookController : Controller
         return View();
     }
 
+    [HttpGet]
+    public IActionResult GetBooksInCategory(int id)
+    {
+        var cat = _bookService.GetBooksInCategory(id);
+        return View("cat",cat);
+    }
+
     [HttpPost]
     public IActionResult Add(Book book, IFormFile imageFile)
     {
